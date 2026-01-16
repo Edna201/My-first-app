@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free AI-powered product description generator. Create compelling product descriptions instantly for any category with customizable tone and length.">
+    <meta name="keywords" content="product description generator, AI copywriting, e-commerce content, product descriptions">
+    <meta name="author" content="AI Product Description Generator">
+    <title>AI Product Description Generator - Free Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✨ AI Product Description Generator</h1>
+            <p class="subtitle">Create compelling product descriptions in seconds</p>
+        </header>
+
+        <main>
+            <form id="productForm" class="product-form" novalidate>
+                <div class="form-section">
+                    <h2>Product Details</h2>
+                    
+                    <div class="form-group">
+                        <label for="productName">
+                            Product Name <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="productName" 
+                            name="productName"
+                            placeholder="e.g., Wireless Bluetooth Headphones"
+                            required
+                            aria-required="true"
+                        >
+                        <span class="error-message" id="productNameError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productCategory">
+                            Product Category <span class="required">*</span>
+                        </label>
+                        <select 
+                            id="productCategory" 
+                            name="productCategory"
+                            required
+                            aria-required="true"
+                        >
+                            <option value="">Select a category</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Fashion">Fashion</option>
+                            <option value="Home & Garden">Home & Garden</option>
+                            <option value="Beauty">Beauty</option>
+                            <option value="Food & Beverage">Food & Beverage</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span class="error-message" id="productCategoryError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="keyFeatures">
+                            Key Features <span class="required">*</span>
+                        </label>
+                        <textarea 
+                            id="keyFeatures" 
+                            name="keyFeatures"
+                            placeholder="Enter features separated by commas or as bullet points:&#10;- Noise cancellation&#10;- 30-hour battery life&#10;- Comfortable design"
+                            rows="5"
+                            required
+                            aria-required="true"
+                        ></textarea>
+                        <span class="help-text">Separate features with commas or line breaks</span>
+                        <span class="error-message" id="keyFeaturesError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="targetAudience">
+                            Target Audience <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="targetAudience" 
+                            name="targetAudience"
+                            placeholder="e.g., busy professionals, fitness enthusiasts"
+                            required
+                            aria-required="true"
+                        >
+                        <span class="error-message" id="targetAudienceError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="toneOfVoice">
+                            Tone of Voice <span class="required">*</span>
+                        </label>
+                        <select 
+                            id="toneOfVoice" 
+                            name="toneOfVoice"
+                            required
+                            aria-required="true"
+                        >
+                            <option value="">Select a tone</option>
+                            <option value="Professional">Professional</option>
+                            <option value="Friendly">Friendly</option>
+                            <option value="Creative">Creative</option>
+                            <option value="Minimalist">Minimalist</option>
+                            <option value="Luxurious">Luxurious</option>
+                        </select>
+                        <span class="error-message" id="toneOfVoiceError"></span>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Description Length</h2>
+                    
+                    <div class="form-group">
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input 
+                                    type="radio" 
+                                    name="descriptionLength" 
+                                    value="short"
+                                    checked
+                                    aria-label="Short description (50-75 words)"
+                                >
+                                <span class="radio-text">
+                                    <strong>Short</strong>
+                                    <span class="radio-subtext">50-75 words</span>
+                                </span>
+                            </label>
+                            
+                            <label class="radio-label">
+                                <input 
+                                    type="radio" 
+                                    name="descriptionLength" 
+                                    value="long"
+                                    aria-label="Long SEO-optimized description (150-200 words)"
+                                >
+                                <span class="radio-text">
+                                    <strong>Long (SEO-Optimized)</strong>
+                                    <span class="radio-subtext">150-200 words</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary" id="generateBtn">
+                        <span class="btn-text">Generate Description</span>
+                        <span class="btn-loader" style="display: none;">⏳ Generating...</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="resetBtn">
+                        Clear Form
+                    </button>
+                </div>
+            </form>
+
+            <div class="output-section" id="outputSection" style="display: none;">
+                <div class="output-header">
+                    <h2>Generated Description</h2>
+                    <button type="button" class="btn btn-copy" id="copyBtn" aria-label="Copy to clipboard">
+                        <span class="copy-text">📋 Copy to Clipboard</span>
+                        <span class="copied-text" style="display: none;">✅ Copied!</span>
+                    </button>
+                </div>
+                
+                <div class="output-content">
+                    <textarea 
+                        id="outputDescription" 
+                        readonly 
+                        aria-label="Generated product description"
+                        rows="8"
+                    ></textarea>
+                    <div class="word-count" id="wordCount"></div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>💡 Tips for Better Descriptions</h3>
+                <ul>
+                    <li><strong>Be specific:</strong> Include concrete features and benefits</li>
+                    <li><strong>Know your audience:</strong> Tailor language to who will use the product</li>
+                    <li><strong>Highlight benefits:</strong> Explain how features solve problems</li>
+                    <li><strong>Use the right tone:</strong> Match your brand voice and target market</li>
+                </ul>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 AI Product Description Generator | Built with ❤️ for e-commerce</p>
+            <p class="footer-note">Note: This tool uses template-based generation. For production use, integrate with an AI API service.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
